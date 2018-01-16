@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<IncomeConfiguration>
+	<Configuration>
+		<CountryCode>UK</CountryCode>
+		<TaxRate>0.25</TaxRate>
+		<TaxExemptionAmount>
+			<Denominator>600</Denominator>
+			<Cents>0</Cents>
+		</TaxExemptionAmount>
+	</Configuration>
+	<Configuration>
+		<CountryCode>DE</CountryCode>
+		<TaxRate>0.20</TaxRate>
+		<TaxExemptionAmount>
+			<Denominator>800</Denominator>
+			<Cents>0</Cents>
+		</TaxExemptionAmount>
+	</Configuration>
+	<Configuration>
+		<CountryCode>PL</CountryCode>
+		<TaxRate>0.19</TaxRate>
+		<TaxExemptionAmount>
+			<Denominator>1200</Denominator>
+		</TaxExemptionAmount>
+	</Configuration>
+</IncomeConfiguration>
