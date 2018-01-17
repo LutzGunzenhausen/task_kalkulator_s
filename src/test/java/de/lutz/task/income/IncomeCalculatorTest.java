@@ -10,37 +10,43 @@ public class IncomeCalculatorTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailingCreationOnNegativeTaxRate() {
-		new IncomeCalculator(-0.1, new Money(0, 0));
+		new IncomeCalculator("DE", -0.1, new Money(0, 0));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testFailingCreationOnTooBigTaxRate() {
-		new IncomeCalculator(1.1, new Money(0, 0));
+		new IncomeCalculator("DE", 1.1, new Money(0, 0));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testFailingCreationOnTaxExemptionAmountBelowZero() {
-		new IncomeCalculator(0.5, new Money(-1000, 0));
+	public void testFailingCreationOnFixedCostBelowZero() {
+		new IncomeCalculator("DE", 0.5, new Money(-1000, 0));
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testFailingCreationOnMissingCountryCode() {
+		new IncomeCalculator(null, 0.5, new Money(1000, 0));
 	}
 	
 	@Test
 	public void testSuccessfulCreationOnPositiveTaxRate() {
-		IncomeCalculator income = new IncomeCalculator(0.5, new Money(100, 0));
+		IncomeCalculator income = new IncomeCalculator("DE", 0.5, new Money(100, 0));
+		assertEquals("DE", income.getCountryCode());
 		assertEquals(0.5, income.getTaxRate(), 0.0);
-		assertEquals(new Money(100, 0), income.getTaxExemptionAmount());
+		assertTrue(income.getFixedCosts().isSameAmountAs(new Money(100, 0)));
 	}
 	
 	@Test
-	public void testCalculateIncomeDoesNotExceedTaxExemptionRate() {
-		IncomeCalculator income = new IncomeCalculator(0.5, new Money(100, 0));
+	public void testCalculateIncomeBelowZero() {
+		IncomeCalculator income = new IncomeCalculator("DE", 0.5, new Money(100, 0));
 		Money result = income.calculateIncome(new Money(100, 0));
-		assertEquals(new Money(100, 0), result);
+		assertTrue(result.isSameAmountAs(new Money(-50, 0)));
 	}
-	
+
 	@Test
-	public void testCalculateIncomeExceedsTaxExemptionRate() {
-		IncomeCalculator income = new IncomeCalculator(0.5, new Money(100, 0));
-		Money result = income.calculateIncome(new Money(110, 0));
-		assertEquals(new Money(105, 0), result);
+	public void testCalculatePositiveIncome() {
+		IncomeCalculator income = new IncomeCalculator("DE", 0.5, new Money(100, 0));
+		Money result = income.calculateIncome(new Money(500, 0));
+		assertTrue(result.isSameAmountAs(new Money(150, 0)));
 	}
 }

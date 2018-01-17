@@ -65,24 +65,27 @@ public class MoneyTest {
 	public void testCompareSmaller() {
 		Money first = new Money(1, 0);
 		Money second = new Money(2, 0);
-		ComparisonResult result = first.compareWith(second);
-		assertEquals(ComparisonResult.LESSER, result);
+		assertTrue(first.isLesserThan(second));
+		assertFalse(first.isSameAmountAs(second));
+		assertFalse(first.isGreaterThan(second));
 	}
 	
 	@Test
 	public void testCompareBigger() {
 		Money first = new Money(2, 0);
 		Money second = new Money(1, 0);
-		ComparisonResult result = first.compareWith(second);
-		assertEquals(ComparisonResult.BIGGER, result);
+		assertTrue(first.isGreaterThan(second));
+		assertFalse(first.isSameAmountAs(second));
+		assertFalse(first.isLesserThan(second));
 	}
 
 	@Test
 	public void testCompareSame() {
 		Money first = new Money(1, 0);
 		Money second = new Money(1, 0);
-		ComparisonResult result = first.compareWith(second);
-		assertEquals(ComparisonResult.EQUAL, result);
+		assertTrue(first.isSameAmountAs(second));
+		assertFalse(first.isGreaterThan(second));
+		assertFalse(first.isLesserThan(second));
 	}
 
 	public void assertMoney(Money money, final int expectedDenominator, final int expectedCents) {

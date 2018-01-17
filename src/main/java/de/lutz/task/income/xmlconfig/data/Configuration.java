@@ -2,23 +2,22 @@ package de.lutz.task.income.xmlconfig.data;
 
 import javax.xml.bind.annotation.XmlElement;
 
-public class Configuration {
+import de.lutz.task.income.IncomeCalculator;
+import de.lutz.task.money.Money;
+
+class Configuration {
 	
 	@XmlElement(name = "CountryCode")
 	private String countryCode;
+
 	@XmlElement(name = "TaxRate")
 	private double taxRate;
-	@XmlElement(name = "TaxExemptionAmount")
-	private XmlTaxExemptionAmount taxExemption;
-	
-	public String getCountryCode() {
-		return countryCode;
-	}
-	public double getTaxRate() {
-		return taxRate;
-	}
-	public XmlTaxExemptionAmount getTaxExemption() {
-		return taxExemption;
-	}
 
+	@XmlElement(name = "FixedCost")
+	private XmlMoney fixedCostXml;
+
+	public IncomeCalculator transformConfiguratoin() {
+		Money fixedCost = fixedCostXml.transformConfiguration();
+		return new IncomeCalculator(countryCode, taxRate, fixedCost);
+	}
 }

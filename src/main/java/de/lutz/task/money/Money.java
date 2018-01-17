@@ -53,28 +53,16 @@ public class Money {
 	public String toString() {
 		return DENOMINATOR + "," + CENTS;
 	}
+	
+	public boolean isGreaterThan(Money other) {
+		return TOTAL_CENTS > other.TOTAL_CENTS;
+	}
 
-	public ComparisonResult compareWith(Money second) {
-		if (this.TOTAL_CENTS < second.TOTAL_CENTS) {
-			return ComparisonResult.LESSER;
-		} else if (this.TOTAL_CENTS > second.TOTAL_CENTS) {
-			return ComparisonResult.BIGGER;
-		}
-		
-		return ComparisonResult.EQUAL;
+	public boolean isLesserThan(Money other) {
+		return TOTAL_CENTS < other.TOTAL_CENTS;
 	}
 	
-	@Override
-	public int hashCode() {
-		return TOTAL_CENTS;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (!obj.getClass().equals(this.getClass())) {
-			return false;
-		}
-		Money other = (Money) obj;
+	public boolean isSameAmountAs(Money other) {
 		return TOTAL_CENTS == other.TOTAL_CENTS;
 	}
 }

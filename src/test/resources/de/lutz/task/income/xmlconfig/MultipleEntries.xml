@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<IncomeConfiguration>
+	<Configuration>
+		<CountryCode>UK</CountryCode>
+		<TaxRate>0.25</TaxRate>
+		<FixedCost>
+			<Denominator>600</Denominator>
+			<Cents>0</Cents>
+		</FixedCost>
+	</Configuration>
+	<Configuration>
+		<CountryCode>PL</CountryCode>
+		<TaxRate>0.19</TaxRate>
+		<FixedCost>
+			<Denominator>1200</Denominator>
+			<Cents>50</Cents>
+		</FixedCost>
+	</Configuration>
+</IncomeConfiguration>
