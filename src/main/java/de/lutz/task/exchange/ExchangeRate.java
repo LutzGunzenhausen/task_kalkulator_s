@@ -2,7 +2,6 @@ package de.lutz.task.exchange;
 
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,5 +29,4 @@ public class ExchangeRate {
 	public Map<String, Double> getRates() {
 		return Collections.unmodifiableMap(this.rates);
 	}
-	
 }

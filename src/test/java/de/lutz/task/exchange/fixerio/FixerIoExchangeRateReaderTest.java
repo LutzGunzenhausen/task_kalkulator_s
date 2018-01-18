@@ -1,4 +1,4 @@
-package de.lutz.task.exchange.json;
+package de.lutz.task.exchange.fixerio;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -12,25 +12,32 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.lutz.task.exchange.ExchangeRate;
 import de.lutz.task.exchange.ReadExchangeRateException;
 
-public class JsonExchangeRateLoaderTest {
-	
-	private static JsonExchangeRateLoader loader;
-	
+public class FixerIoExchangeRateReaderTest {
+
+	private static FixerIoExchangeRateReader reader;
+	private FixerIoUrlBuilder builder;
+
 	@BeforeClass
-	public static void initialize() {
-		loader = new JsonExchangeRateLoader();
+	public static void initializeClass() {
+		reader = new FixerIoExchangeRateReader();
 	}
-	
+
+	@Before
+	public void initializeTestCase() {
+		builder = new FixerIoUrlBuilder();
+	}
+
 	@Test
 	public void testStuff() throws ReadExchangeRateException {
 		InputStream stream = getClass().getResourceAsStream("Sample.json");
-		ExchangeRate rate = loader.readExchangeRate(stream);
+		ExchangeRate rate = reader.readExchangeRate(stream);
 		assertNotNull(rate);
 		assertEquals("PLN", rate.getBase());
 		LocalDate date = rate.getDate();
@@ -43,11 +50,14 @@ public class JsonExchangeRateLoaderTest {
 		assertRate(rates, "USD", 0.29);
 		assertRate(rates, "EUR", 0.23);
 	}
-	
+
 	@Test
 	public void testFromHttp() throws ReadExchangeRateException, MalformedURLException, IOException {
-		InputStream is = new URL("https://api.fixer.io/latest?base=PLN;symbols=USD").openStream();
-		ExchangeRate rate = loader.readExchangeRate(is);
+		URL url = builder.setBase("PLN"
+				).addSymbol("USD").setDate(LocalDate.of(2018, 1, 17)).build();
+		
+		InputStream is = url.openStream();
+		ExchangeRate rate = reader.readExchangeRate(is);
 		assertNotNull(rate);
 		assertEquals("PLN", rate.getBase());
 		LocalDate date = rate.getDate();
@@ -65,7 +75,7 @@ public class JsonExchangeRateLoaderTest {
 		double actualRate = rates.get(expectedCountryCode);
 		assertEquals(expectedRate, actualRate, 0.0);
 	}
-	
+
 	private void assertDate(LocalDate date, int expectedYear, int expectedMonth, int expectedDay) {
 		assertNotNull(date);
 		assertEquals(expectedYear, date.getYear());
