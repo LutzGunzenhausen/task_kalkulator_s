@@ -1,4 +1,4 @@
-package de.lutz.task.income.xmlconfig.data;
+package de.lutz.task.countryconfig.xmlconfig.data;
 
 public class IncomeCalculatorLoaderException extends Exception {
 	private static final long serialVersionUID = -2617075166428766268L;

@@ -1,14 +1,17 @@
-package de.lutz.task.income.xmlconfig.data;
+package de.lutz.task.countryconfig.xmlconfig.data;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import de.lutz.task.income.IncomeCalculator;
+import de.lutz.task.countryconfig.CountryConfiguration;
 import de.lutz.task.money.Money;
 
 class Configuration {
 	
 	@XmlElement(name = "CountryCode")
 	private String countryCode;
+	
+	@XmlElement(name = "CurrencyCode")
+	private String currencyCode;
 
 	@XmlElement(name = "TaxRate")
 	private double taxRate;
@@ -16,8 +19,8 @@ class Configuration {
 	@XmlElement(name = "FixedCost")
 	private XmlMoney fixedCostXml;
 
-	public IncomeCalculator transformConfiguratoin() {
+	public CountryConfiguration transformConfiguratoin() {
 		Money fixedCost = fixedCostXml.transformConfiguration();
-		return new IncomeCalculator(countryCode, taxRate, fixedCost);
+		return new CountryConfiguration(countryCode, currencyCode, taxRate, fixedCost);
 	}
 }

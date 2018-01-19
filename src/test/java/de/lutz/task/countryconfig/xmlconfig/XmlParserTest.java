@@ -1,4 +1,4 @@
-package de.lutz.task.income.xmlconfig;
+package de.lutz.task.countryconfig.xmlconfig;
 
 import java.io.InputStream;
 import java.util.Collection;
@@ -7,8 +7,9 @@ import java.util.Iterator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.lutz.task.income.IncomeCalculator;
-import de.lutz.task.income.xmlconfig.data.IncomeCalculatorLoaderException;
+import de.lutz.task.countryconfig.CountryConfiguration;
+import de.lutz.task.countryconfig.xmlconfig.XmlParser;
+import de.lutz.task.countryconfig.xmlconfig.data.IncomeCalculatorLoaderException;
 import de.lutz.task.money.Money;
 
 import static org.junit.Assert.*;
@@ -25,7 +26,7 @@ public class XmlParserTest {
 	@Test
 	public void testEmptyImport() throws IncomeCalculatorLoaderException {
 		InputStream stream = getClass().getResourceAsStream("Empty.xml");
-		Collection<IncomeCalculator> calculators = parser.loadIncomeCalculators(stream);
+		Collection<CountryConfiguration> calculators = parser.loadIncomeCalculators(stream);
 		assertNotNull(calculators);
 		assertTrue(calculators.isEmpty());
 	}
@@ -33,7 +34,7 @@ public class XmlParserTest {
 	@Test
 	public void testImportOneEntry() throws IncomeCalculatorLoaderException {
 		InputStream stream = getClass().getResourceAsStream("OneEntry.xml");
-		Collection<IncomeCalculator> calculators = parser.loadIncomeCalculators(stream);
+		Collection<CountryConfiguration> calculators = parser.loadIncomeCalculators(stream);
 		assertNotNull(calculators);
 		assertFalse(calculators.isEmpty());
 		assertEquals(1, calculators.size());
@@ -43,11 +44,11 @@ public class XmlParserTest {
 	@Test
 	public void testImportMultipleEntries() throws IncomeCalculatorLoaderException {
 		InputStream stream = getClass().getResourceAsStream("MultipleEntries.xml");
-		Collection<IncomeCalculator> calculators = parser.loadIncomeCalculators(stream);
+		Collection<CountryConfiguration> calculators = parser.loadIncomeCalculators(stream);
 		assertNotNull(calculators);
 		assertFalse(calculators.isEmpty());
 		assertEquals(2, calculators.size());
-		Iterator<IncomeCalculator> iterator = calculators.iterator();
+		Iterator<CountryConfiguration> iterator = calculators.iterator();
 		assertCalculator(iterator.next(), "UK", 0.25, new Money(600, 0));
 		assertCalculator(iterator.next(), "PL", 0.19, new Money(1200, 50));
 	}
@@ -58,7 +59,7 @@ public class XmlParserTest {
 		parser.loadIncomeCalculators(stream);
 	}
 	
-	private void assertCalculator(IncomeCalculator calculator, String expectedCountryCode,
+	private void assertCalculator(CountryConfiguration calculator, String expectedCountryCode,
 			double expectedTaxRate, Money expectedFixedCosts) {
 		assertEquals(expectedCountryCode, calculator.getCountryCode());
 		assertEquals(expectedTaxRate, calculator.getTaxRate(), 0);

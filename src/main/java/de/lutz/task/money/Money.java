@@ -49,6 +49,10 @@ public class Money {
 		return new Money(product);
 	}
 	
+	public Money divide(double factor) {
+		return multiply(1.0 / factor);
+	}
+	
 	@Override
 	public String toString() {
 		return DENOMINATOR + "," + CENTS;

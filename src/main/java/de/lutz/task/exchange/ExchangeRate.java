@@ -29,4 +29,9 @@ public class ExchangeRate {
 	public Map<String, Double> getRates() {
 		return Collections.unmodifiableMap(this.rates);
 	}
+	
+	public double getConversionFactorForCountry(String countryCode) {
+		return this.rates.get(countryCode);
+	}
+	
 }

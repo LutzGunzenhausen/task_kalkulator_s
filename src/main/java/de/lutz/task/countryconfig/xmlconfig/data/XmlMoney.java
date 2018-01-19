@@ -1,4 +1,4 @@
-package de.lutz.task.income.xmlconfig.data;
+package de.lutz.task.countryconfig.xmlconfig.data;
 
 import javax.xml.bind.annotation.XmlElement;
 

@@ -2,18 +2,11 @@
 <IncomeConfiguration>
 	<Configuration>
 		<CountryCode>UK</CountryCode>
+		<CurrencyCode>GBP</CurrencyCode>
 		<TaxRate>0.25</TaxRate>
 		<FixedCost>
 			<Denominator>600</Denominator>
 			<Cents>0</Cents>
-		</FixedCost>
-	</Configuration>
-	<Configuration>
-		<CountryCode>PL</CountryCode>
-		<TaxRate>0.19</TaxRate>
-		<FixedCost>
-			<Denominator>1200</Denominator>
-			<Cents>50</Cents>
 		</FixedCost>
 	</Configuration>
 </IncomeConfiguration>

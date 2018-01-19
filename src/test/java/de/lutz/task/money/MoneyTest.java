@@ -62,6 +62,13 @@ public class MoneyTest {
 	}
 	
 	@Test
+	public void testDivision() {
+		Money money = new Money(100, 0);
+		Money result = money.divide(3);
+		assertMoney(result, 33, 33);
+	}
+	
+	@Test
 	public void testCompareSmaller() {
 		Money first = new Money(1, 0);
 		Money second = new Money(2, 0);
