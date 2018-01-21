@@ -48,4 +48,16 @@ public class NetIncomeCalculationService {
 	public Collection<String> getCountryCodeCollection() {
 		return registry.getCountryCodeCollection();
 	}
+
+	public double getTaxRateForCountry(String countryCode) {
+		return registry.getConfigurationForCode(countryCode).getTaxRate();
+	}
+
+	public Money getFixedCostsForCountry(String countryCode) {
+		return this.registry.getConfigurationForCode(countryCode).getFixedCosts();
+	}
+
+	public String getCurrencyForCountry(String countryCode) {
+		return this.registry.getConfigurationForCode(countryCode).getCurrencyCode();
+	}
 }
