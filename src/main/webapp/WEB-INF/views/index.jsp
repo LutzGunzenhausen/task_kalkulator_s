@@ -24,7 +24,7 @@
 						<option value="${country}" <c:if test="${country == inputCountry}">selected</c:if>>${country}</option>
 					</c:forEach>
 				</select>
-				<input type="submit" value="Check" />
+				<input type="submit" value="Check" class="btn btn-primary btn-sm" id="submitButton"/>
 			</form>
 		</div>
 		<div class="tablecontainer">

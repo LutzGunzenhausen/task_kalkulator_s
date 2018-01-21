@@ -33,6 +33,12 @@ public class NetIncomeCalculationController {
     public String greeting(@RequestParam(value="netIncome", required=true) String dailyGrossIncome,
     		@RequestParam(value="country", required=true) String countryCode,
     		Model model) {
+		if (dailyGrossIncome == null || dailyGrossIncome.trim().isEmpty()) {
+			model.addAttribute("inputCountry", countryCode);
+			model.addAttribute("countryList", service.getCountryCodeCollection());
+			return "/index";
+		}
+		
 		Money money = extractMoneyFromInput(dailyGrossIncome);
         Money netIncome = service.calculateNetIncome(money, countryCode);
         String result = layout.format(netIncome);
