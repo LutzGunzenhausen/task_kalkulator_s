@@ -1,7 +1,7 @@
 package de.lutz.task.money;
 
 public class Money {
-
+	
 	private final int TOTAL_CENTS;
 	private final int DENOMINATOR;
 	private final int CENTS;
@@ -9,7 +9,7 @@ public class Money {
 	private Money(int totalCents) {
 		this.TOTAL_CENTS = totalCents;
 		this.DENOMINATOR = totalCents / 100;
-		this.CENTS = totalCents % 100;
+		this.CENTS = Math.abs(totalCents % 100);
 	}
 
 	public Money(int denominator, int cents) {

@@ -8,33 +8,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import de.lutz.task.money.Money;
+import de.lutz.task.money.MoneyLayout;
 import de.lutz.task.netincome.NetIncomeCalculationService;
 
 @Controller
 @RequestMapping("/index")
-public class HomeController {
+public class NetIncomeCalculationController {
+	
+	private static final int DENOMINATOR_INDEX = 0;
+	private static final int CENTS_INDEX = 1;
 	
 	private NetIncomeCalculationService service;
+	private MoneyLayout layout;
 	
 	@Autowired
-	public HomeController(NetIncomeCalculationService service) {
+	public NetIncomeCalculationController(NetIncomeCalculationService service) {
 		this.service = service;
+		this.layout = new MoneyLayout();
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-    public String greeting(@RequestParam(value="netIncome", required=false, defaultValue="0,0") String dailyGrossIncome,
-    		@RequestParam(value="country", required=false, defaultValue="UK") String countryCode,
+    public String greeting(@RequestParam(value="netIncome", required=true) String dailyGrossIncome,
+    		@RequestParam(value="country", required=true) String countryCode,
     		Model model) {
-		String[] parts = dailyGrossIncome.split(",");
-		int denominator = Integer.parseInt(parts[0]);
+		String[] parts = dailyGrossIncome.split("[.]");
+		int denominator = Integer.parseInt(parts[DENOMINATOR_INDEX]);
 		int cents = 0;
 		if (parts.length == 2) {
-			cents = Integer.parseInt(parts[1]);
+			cents = Integer.parseInt(parts[CENTS_INDEX]);
 		}
 		Money money = new Money(denominator, cents);
         Money netIncome = service.calculateNetIncome(money, countryCode);
-        model.addAttribute("result", netIncome.toString());
-        
+        String result = layout.format(netIncome);
+        model.addAttribute("result", result);
         
         return "/result";
     }

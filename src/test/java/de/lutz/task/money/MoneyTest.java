@@ -62,6 +62,13 @@ public class MoneyTest {
 	}
 	
 	@Test
+	public void testMultiplicationWithNegativeNumber() {
+		Money money = new Money(100, 0);
+		Money result = money.multiply(-1.0 / 3);
+		assertMoney(result, -33, 33);
+	}
+	
+	@Test
 	public void testDivision() {
 		Money money = new Money(100, 0);
 		Money result = money.divide(3);

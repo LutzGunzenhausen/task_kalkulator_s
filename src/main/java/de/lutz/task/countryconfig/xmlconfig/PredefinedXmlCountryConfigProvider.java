@@ -13,10 +13,19 @@ import de.lutz.task.countryconfig.xmlconfig.data.IncomeCalculatorLoaderException
 public class PredefinedXmlCountryConfigProvider implements CountryConfigProvider {
 
 	private static final String XML_NAME = "BasicIncomeConfiguration.xml";
+	private final String BASE_NAME;
+	
+	public PredefinedXmlCountryConfigProvider() {
+		this(XML_NAME);
+	}
+	
+	public PredefinedXmlCountryConfigProvider(String baseName) {
+		this.BASE_NAME = baseName;
+	}
 
 	@Override
 	public Map<String, CountryConfiguration> getConfigurations() {
-		try (InputStream stream = getClass().getResourceAsStream(XML_NAME)) {
+		try (InputStream stream = getClass().getResourceAsStream(this.BASE_NAME)) {
 			XmlParser parser = new XmlParser();
 			Collection<CountryConfiguration> calculators =
 					parser.loadIncomeCalculators(stream);

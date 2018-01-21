@@ -1,5 +1,11 @@
 package de.lutz.task.countryconfig.xmlconfig;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Iterator;
@@ -8,11 +14,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import de.lutz.task.countryconfig.CountryConfiguration;
-import de.lutz.task.countryconfig.xmlconfig.XmlParser;
 import de.lutz.task.countryconfig.xmlconfig.data.IncomeCalculatorLoaderException;
 import de.lutz.task.money.Money;
-
-import static org.junit.Assert.*;
 
 public class XmlParserTest {
 	
@@ -55,7 +58,9 @@ public class XmlParserTest {
 	
 	@Test(expected = IncomeCalculatorLoaderException.class)
 	public void testExceptionAtMalformedXml() throws IncomeCalculatorLoaderException {
-		InputStream stream = getClass().getResourceAsStream("MalformedXml.xml");
+		final String malformedXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><IncomeConfiguration>";
+		
+		InputStream stream = new ByteArrayInputStream(malformedXml.getBytes());
 		parser.loadIncomeCalculators(stream);
 	}
 	
