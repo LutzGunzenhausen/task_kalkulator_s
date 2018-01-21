@@ -1,5 +1,6 @@
 package de.lutz.task.countryconfig;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,5 +18,9 @@ public class CountryConfigRegistry {
 	
 	public CountryConfiguration getConfigurationForCode(String countryCode) {
 		return this.configurations.get(countryCode);
+	}
+	
+	public Collection<String> getCountryCodeCollection() {
+		return configurations.keySet();
 	}
 }

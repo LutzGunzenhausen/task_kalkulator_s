@@ -6,11 +6,28 @@
  * user guide available at https://docs.gradle.org/4.0/userguide/tutorial_java_projects.html
  */
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.4.2'
+    }
+}
+
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.tomcat'
 
 // Apply the application plugin to add support for building an application
 apply plugin: 'application'
+
+// War file name
+war.baseName = 'task_kalkulator_s'
+// Web directory, this overrides the default value "webapp"
+project.webAppDirName = 'src/main/webapp'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -35,11 +52,26 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework/spring-context
 	compile group: 'org.springframework', name: 'spring-context', version: '5.0.2.RELEASE'
 	
+	// https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+	compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.2.RELEASE'
 	
     // Use JUnit test framework
     testCompile group:'junit', name:'junit', version:'4.12'
+	// https://mvnrepository.com/artifact/javax.servlet/servlet-api
+	compile group: 'javax.servlet', name: 'servlet-api', version: '2.3'
+	
+    
+    def tomcatVersion = '8.5.24'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:8.5.2"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
 }
 
 // Define the main class for the application
 mainClassName = 'App'
 
+// context where tomcat is deployed, by defautl localhost:8080/
+tomcatRun.contextPath = '/'
+tomcatRunWar.contextPath = '/'

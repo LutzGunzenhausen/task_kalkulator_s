@@ -1,6 +1,6 @@
 package de.lutz.task.netincome;
 
-import java.util.Map;
+import java.util.Collection;
 
 import de.lutz.task.countryconfig.CountryConfigRegistry;
 import de.lutz.task.countryconfig.CountryConfiguration;
@@ -13,14 +13,15 @@ import de.lutz.task.money.Money;
 public class NetIncomeCalculationService {
 	
 	private static final int DAYS_PER_MONTH = 22;
+	private static final String BASE_CURRENCY = "PLN";
 	
 	private CountryConfigRegistry registry;
 	private ExchangeRateProvider exchangeRateProvider;
 	
-	public NetIncomeCalculationService(
-			Map<String, CountryConfiguration> countryConfigurations,
+	public NetIncomeCalculationService(CountryConfigRegistry registry,
 			ExchangeRateProvider exchangeRateProvider) {
 		super();
+		this.registry = registry;
 		this.exchangeRateProvider = new FixerIoExchangeRateProvider();
 	}
 
@@ -31,10 +32,18 @@ public class NetIncomeCalculationService {
 		Money monthlyNetIncome = config.calculateIncome(monthlyGrossIncome);
 		try {
 			ExchangeRate exchangeRate = exchangeRateProvider.readExchangeRate();
-			double conversionFactor = exchangeRate.getConversionFactorForCountry(countryCode);
+			final String symbol = config.getCurrencyCode();
+			double conversionFactor = 1.0;
+			if (!symbol.equals(BASE_CURRENCY)) {
+				conversionFactor = exchangeRate.getConversionFactorForCountry(symbol);
+			}
 			return monthlyNetIncome.divide(conversionFactor);
 		} catch (ReadExchangeRateException ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+	
+	public Collection<String> getCountryCodeCollection() {
+		return registry.getCountryCodeCollection();
 	}
 }

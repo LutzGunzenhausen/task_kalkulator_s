@@ -16,7 +16,14 @@ public class App {
 	private CountryConfigRegistry registry;
 
 	public void start() {
-		
+//		NetIncomeCalculationService service = new NetIncomeCalculationService(
+//				registry, provider);
+//		GuiController controller = new GuiControllerImpl(service);
+//		JFrame frame = new TestGUI(controller);
+//		frame.pack();
+//		frame.setLocationRelativeTo(null);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame.setVisible(true);
 	}
 	
 	@Autowired

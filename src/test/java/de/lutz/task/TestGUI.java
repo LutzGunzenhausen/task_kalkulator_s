@@ -17,14 +17,6 @@ import de.lutz.task.money.Money;
 public class TestGUI extends JFrame {
 	private static final long serialVersionUID = -7364625573532383423L;
 	
-	public static void main(String[] args) {
-		JFrame frame = new TestGUI(new GuiControllerImpl());
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
-	
 	private JPanel jPanelInput;
 	private JLabel jLabelValue;
 	private JTextField jTextFieldValue;
@@ -109,7 +101,10 @@ public class TestGUI extends JFrame {
 		String text = this.getjTextFieldValue().getText();
 		String[] parts = text.split(",");
 		int denominator = Integer.parseInt(parts[0]);
-		int cents = Integer.parseInt(parts[1]);
+		int cents = 0;
+		if (parts.length == 2) {
+			cents = Integer.parseInt(parts[1]);
+		}
 		Money money = new Money(denominator, cents);
 		String countryCode = (String) getjComboboxCountry().getSelectedItem();
 		Money income = this.controller.calculateMonthlyNetIncomeInZloty(money, countryCode);
