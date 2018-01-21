@@ -10,6 +10,14 @@ import de.lutz.task.countryconfig.CountryConfigProvider;
 import de.lutz.task.countryconfig.CountryConfiguration;
 import de.lutz.task.countryconfig.xmlconfig.data.IncomeCalculatorLoaderException;
 
+/**
+ * Implementation of the {@link CountryConfigProvider}, that provides the
+ * {@link CountryConfiguration}s, that should already by default be included in the
+ * software.
+ *
+ * @author Christian-PC
+ * 2018
+ */
 public class PredefinedXmlCountryConfigProvider implements CountryConfigProvider {
 
 	private static final String XML_NAME = "BasicIncomeConfiguration.xml";

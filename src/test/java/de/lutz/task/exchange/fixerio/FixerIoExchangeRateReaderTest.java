@@ -35,7 +35,7 @@ public class FixerIoExchangeRateReaderTest {
 	}
 
 	@Test
-	public void testStuff() throws ReadExchangeRateException {
+	public void testExchangeRateReading() throws ReadExchangeRateException {
 		InputStream stream = getClass().getResourceAsStream("Sample.json");
 		ExchangeRate rate = reader.readExchangeRate(stream);
 		assertNotNull(rate);

@@ -9,7 +9,7 @@
 		<title>Net-Income calculator</title>  
 	</head>
 
-	<body ng-app="myApp" class="ng-cloak">
+	<body>
 		<div class="formcontainer">
 			<form  name="myForm" class="form-horizontal" method="POST">
 				<input type="text" id="dailyGrossIncome" pattern="^[0-9]+(.[0-9]{2}){0,1}$"

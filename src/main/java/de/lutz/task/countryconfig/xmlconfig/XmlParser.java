@@ -9,26 +9,26 @@ import javax.xml.bind.Unmarshaller;
 
 import de.lutz.task.countryconfig.CountryConfiguration;
 import de.lutz.task.countryconfig.xmlconfig.data.IncomeCalculatorLoaderException;
-import de.lutz.task.countryconfig.xmlconfig.data.IncomeConfigurationXml;
+import de.lutz.task.countryconfig.xmlconfig.data.XmlCountryConfigurations;
 
-public class XmlParser {
+class XmlParser {
 	
 	public Collection<CountryConfiguration> loadIncomeCalculators(InputStream stream)
 			throws IncomeCalculatorLoaderException {
 		try {
-			IncomeConfigurationXml configuration = getConfiguration(stream);
+			XmlCountryConfigurations configuration = getConfiguration(stream);
 			return configuration.transformConfiguration();
 		} catch (JAXBException ex) {
 			throw new IncomeCalculatorLoaderException(ex);
 		}
 	}
 	
-	private IncomeConfigurationXml getConfiguration(InputStream stream)
+	private XmlCountryConfigurations getConfiguration(InputStream stream)
 			throws JAXBException {
-		JAXBContext context = JAXBContext.newInstance(IncomeConfigurationXml.class);
+		JAXBContext context = JAXBContext.newInstance(XmlCountryConfigurations.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		IncomeConfigurationXml config =
-				(IncomeConfigurationXml) unmarshaller.unmarshal(stream);
+		XmlCountryConfigurations config =
+				(XmlCountryConfigurations) unmarshaller.unmarshal(stream);
 		return config;
 	}
 }

@@ -7,7 +7,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public class FixerIoUrlBuilder {
+/**
+ * Builder-class to create valid URLs to access specific exchange rates
+ * from the FixerIO service.
+ *
+ * @author Christian-PC
+ * 2018
+ */
+class FixerIoUrlBuilder {
 	
 	private static final String SYMBOLS_KEY = "symbols";
 	private static final String BASE_KEY = "base";

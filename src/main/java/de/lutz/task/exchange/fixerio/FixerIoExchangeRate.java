@@ -9,6 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import de.lutz.task.exchange.ExchangeRate;
 
+/**
+ * Abstract representation of the {@link ExchangeRate} for the way as we
+ * get it from the fixer.io service.
+ *
+ * @author Christian-PC
+ * 2018
+ */
 class FixerIoExchangeRate {
 	
 	private final String base;
@@ -24,6 +31,11 @@ class FixerIoExchangeRate {
 		this.rates = rates;
 	}
 
+	/**
+	 * Transforms this instance's content to a new {@link ExchangeRate}-instance.
+	 *
+	 * @return the newly created {@link ExchangeRate}.
+	 */
 	public ExchangeRate transformToExchangeRate() {
 		return new ExchangeRate(base, date, rates);
 	}

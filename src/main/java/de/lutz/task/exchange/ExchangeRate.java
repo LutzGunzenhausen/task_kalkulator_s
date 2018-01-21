@@ -5,6 +5,14 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * An instance of this class collects all kind of information about the exchange-rate
+ * to some given base. It consists of the date for when the exchange rate was determined
+ * and the different rates to make the transformation from some currency to the given base.
+ *
+ * @author Christian-PC
+ * 2018
+ */
 public class ExchangeRate {
 
 	private final String base;

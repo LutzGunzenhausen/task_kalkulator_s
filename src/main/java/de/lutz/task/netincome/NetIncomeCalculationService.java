@@ -34,6 +34,8 @@ public class NetIncomeCalculationService {
 			ExchangeRate exchangeRate = exchangeRateProvider.readExchangeRate();
 			final String symbol = config.getCurrencyCode();
 			double conversionFactor = 1.0;
+			// If the input was already made for poland there is no need for transformation
+			// anymore.
 			if (!symbol.equals(BASE_CURRENCY)) {
 				conversionFactor = exchangeRate.getConversionFactorForCountry(symbol);
 			}

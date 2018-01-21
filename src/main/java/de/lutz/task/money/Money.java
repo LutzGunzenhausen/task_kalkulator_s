@@ -1,5 +1,12 @@
 package de.lutz.task.money;
 
+/**
+ * The general representation of money. It offers several methods for calculation
+ * in order to take care of problems that might occur when having to round or similar.
+ *
+ * @author Christian-PC
+ * 2018
+ */
 public class Money {
 	
 	private final int TOTAL_CENTS;

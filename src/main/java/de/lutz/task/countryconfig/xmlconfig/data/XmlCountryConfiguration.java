@@ -5,7 +5,13 @@ import javax.xml.bind.annotation.XmlElement;
 import de.lutz.task.countryconfig.CountryConfiguration;
 import de.lutz.task.money.Money;
 
-class Configuration {
+/**
+ * Data-class to represent one {@link CountryConfiguration} via xml.
+ *
+ * @author Christian-PC
+ * 2018
+ */
+class XmlCountryConfiguration {
 	
 	@XmlElement(name = "CountryCode")
 	private String countryCode;

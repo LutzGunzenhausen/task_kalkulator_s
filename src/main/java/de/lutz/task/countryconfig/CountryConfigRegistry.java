@@ -5,6 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Registry to collect all the {@link CountryConfiguration}s and give central
+ * access to them.
+ *
+ * @author Christian-PC
+ * 2018
+ */
 public class CountryConfigRegistry {
 	
 	private Map<String, CountryConfiguration> configurations;

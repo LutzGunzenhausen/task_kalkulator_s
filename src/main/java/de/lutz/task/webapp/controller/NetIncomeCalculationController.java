@@ -31,6 +31,9 @@ public class NetIncomeCalculationController {
     public String greeting(@RequestParam(value="netIncome", required=true) String dailyGrossIncome,
     		@RequestParam(value="country", required=true) String countryCode,
     		Model model) {
+		// here we are pretty safe to make the transformations, as we took care at the
+		// form that no invalid input is created, hence we would not reach here if the
+		// user enters crap.
 		String[] parts = dailyGrossIncome.split("[.]");
 		int denominator = Integer.parseInt(parts[DENOMINATOR_INDEX]);
 		int cents = 0;

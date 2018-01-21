@@ -7,6 +7,14 @@ import javax.annotation.concurrent.Immutable;
 
 import de.lutz.task.money.Money;
 
+/**
+ * This class collects all the configuration, relevant for a chosen country
+ * and provides the functionality to calculate the monthly net income for
+ * a given gross-income.
+ *
+ * @author Christian-PC
+ * 2018
+ */
 @Immutable
 public class CountryConfiguration {
 	
@@ -47,8 +55,8 @@ public class CountryConfiguration {
 		return FIXED_COSTS;
 	}
 
-	public Money calculateIncome(Money money) {
-		Money result = money.multiply(1 - TAX_RATE);
+	public Money calculateIncome(Money grossIncome) {
+		Money result = grossIncome.multiply(1 - TAX_RATE);
 		return result.subtract(FIXED_COSTS);
 	}
 }

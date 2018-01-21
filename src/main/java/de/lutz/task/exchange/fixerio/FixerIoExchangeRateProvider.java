@@ -8,6 +8,13 @@ import de.lutz.task.exchange.ExchangeRate;
 import de.lutz.task.exchange.ExchangeRateProvider;
 import de.lutz.task.exchange.ReadExchangeRateException;
 
+/**
+ * Implementation of the {@link ExchangeRateProvider} that takes care of reading
+ * {@link ExchangeRate}s from the fixer.io service.
+ *
+ * @author Christian-PC
+ * 2018
+ */
 public class FixerIoExchangeRateProvider implements ExchangeRateProvider {
 	
 	private final URL url;
