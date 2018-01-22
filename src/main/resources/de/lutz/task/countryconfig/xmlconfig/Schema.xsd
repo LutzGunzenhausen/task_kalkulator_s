@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:complexType name="cost">
+		<xs:sequence>
+			<xs:element name="Denominator" minOccurs="1"/>
+			<xs:element name="Cents" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="config">
+		<xs:all>
+			<xs:element name="CountryCode" />
+			<xs:element name="CurrencyCode" />
+			<xs:element name="TaxRate" />
+			<xs:element name="FixedCost" type="cost" />
+		</xs:all>
+	</xs:complexType>
+	
+	<xs:element name="Configuration" type="config"/>
+
+	<xs:complexType name="incConfiguration">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="Configuration"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="IncomeConfiguration" type="incConfiguration"/>
+
+</xs:schema>
