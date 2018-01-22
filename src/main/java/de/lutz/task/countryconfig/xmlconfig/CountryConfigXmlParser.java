@@ -11,7 +11,14 @@ import de.lutz.task.countryconfig.CountryConfiguration;
 import de.lutz.task.countryconfig.xmlconfig.data.IncomeCalculatorLoaderException;
 import de.lutz.task.countryconfig.xmlconfig.data.XmlCountryConfigurations;
 
-class XmlParser {
+/**
+ * Parser class to extract {@link CountryConfiguration}s from a given XML as defined
+ * by {@link XmlCountryConfigurations}s and all it's dependent classes.
+ *
+ * @author Christian-PC
+ * 2018
+ */
+class CountryConfigXmlParser {
 	
 	public Collection<CountryConfiguration> loadIncomeCalculators(InputStream stream)
 			throws IncomeCalculatorLoaderException {

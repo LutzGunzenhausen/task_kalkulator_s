@@ -18,7 +18,7 @@ import de.lutz.task.countryconfig.CountryConfigRegistry;
 import de.lutz.task.countryconfig.xmlconfig.PredefinedXmlCountryConfigProvider;
 import de.lutz.task.exchange.ExchangeRateProvider;
 import de.lutz.task.exchange.fixerio.FixerIoExchangeRateProvider;
-import de.lutz.task.netincome.NetIncomeCalculationService;
+import de.lutz.task.webapp.service.NetIncomeCalculationService;
 
 @Configuration
 @EnableWebMvc

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.ThreadSafe;
 
 import de.lutz.task.money.Money;
 
@@ -16,17 +17,21 @@ import de.lutz.task.money.Money;
  * 2018
  */
 @Immutable
+@ThreadSafe
 public class CountryConfiguration {
 	
 	private static final Money MINIMUM_FIXED_COSTS = new Money(0, 0);
 	
+	@Nonnull
 	private final String COUNTRY_CODE;
-	private String CURRENCY_CODE;
+	@Nonnull
+	private final String CURRENCY_CODE;
 	private final double TAX_RATE;
+	@Nonnull
 	private final Money FIXED_COSTS;
 
 	public CountryConfiguration(@Nonnull String countryCode, @Nonnull String currencyCode,
-			double taxRate, Money fixedCosts) {
+			double taxRate, @Nonnull Money fixedCosts) {
 		if (taxRate < 0 || taxRate > 1) {
 			throw new IllegalArgumentException("The tax-rate must be between 0 and 1.");
 		}
@@ -36,13 +41,15 @@ public class CountryConfiguration {
 		this.COUNTRY_CODE = Objects.requireNonNull(countryCode);
 		this.CURRENCY_CODE = Objects.requireNonNull(currencyCode);
 		this.TAX_RATE = taxRate;
-		this.FIXED_COSTS = fixedCosts;
+		this.FIXED_COSTS = Objects.requireNonNull(fixedCosts);
 	}
 	
+	@Nonnull
 	public String getCountryCode() {
 		return COUNTRY_CODE;
 	}
 	
+	@Nonnull
 	public String getCurrencyCode() {
 		return CURRENCY_CODE;
 	}
@@ -51,12 +58,8 @@ public class CountryConfiguration {
 		return TAX_RATE;
 	}
 
+	@Nonnull
 	public Money getFixedCosts() {
 		return FIXED_COSTS;
-	}
-
-	public Money calculateIncome(Money grossIncome) {
-		Money result = grossIncome.multiply(1 - TAX_RATE);
-		return result.subtract(FIXED_COSTS);
 	}
 }

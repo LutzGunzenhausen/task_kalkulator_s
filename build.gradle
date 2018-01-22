@@ -60,6 +60,11 @@ dependencies {
 	// https://mvnrepository.com/artifact/javax.servlet/servlet-api
 	compile group: 'javax.servlet', name: 'servlet-api', version: '2.3'
 	
+	// https://mvnrepository.com/artifact/org.springframework/spring-test
+	testCompile group: 'org.springframework', name: 'spring-test', version: '5.0.2.RELEASE'
+
+	
+	
     
     def tomcatVersion = '8.5.24'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",

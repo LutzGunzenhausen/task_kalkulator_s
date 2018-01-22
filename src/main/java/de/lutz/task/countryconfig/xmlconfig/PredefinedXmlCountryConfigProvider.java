@@ -34,7 +34,7 @@ public class PredefinedXmlCountryConfigProvider implements CountryConfigProvider
 	@Override
 	public Map<String, CountryConfiguration> getConfigurations() {
 		try (InputStream stream = getClass().getResourceAsStream(this.BASE_NAME)) {
-			XmlParser parser = new XmlParser();
+			CountryConfigXmlParser parser = new CountryConfigXmlParser();
 			Collection<CountryConfiguration> calculators =
 					parser.loadIncomeCalculators(stream);
 			Map<String, CountryConfiguration> result = new HashMap<>();

@@ -38,21 +38,8 @@ public class CountryConfigurationTest {
 	public void testSuccessfulCreationOnPositiveTaxRate() {
 		CountryConfiguration config = new CountryConfiguration("DE", "EUR", 0.5, new Money(100, 0));
 		assertEquals("DE", config.getCountryCode());
+		assertEquals("EUR", config.getCurrencyCode());
 		assertEquals(0.5, config.getTaxRate(), 0.0);
 		assertTrue(config.getFixedCosts().isSameAmountAs(new Money(100, 0)));
-	}
-	
-	@Test
-	public void testCalculateIncomeBelowZero() {
-		CountryConfiguration config = new CountryConfiguration("DE", "EUR", 0.5, new Money(100, 0));
-		Money result = config.calculateIncome(new Money(100, 0));
-		assertTrue(result.isSameAmountAs(new Money(-50, 0)));
-	}
-
-	@Test
-	public void testCalculatePositiveIncome() {
-		CountryConfiguration config = new CountryConfiguration("DE", "EUR", 0.5, new Money(100, 0));
-		Money result = config.calculateIncome(new Money(500, 0));
-		assertTrue(result.isSameAmountAs(new Money(150, 0)));
 	}
 }

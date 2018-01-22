@@ -38,8 +38,7 @@ public class ExchangeRate {
 		return Collections.unmodifiableMap(this.rates);
 	}
 	
-	public double getConversionFactorForCountry(String countryCode) {
+	public Double getConversionFactorForCountry(String countryCode) {
 		return this.rates.get(countryCode);
 	}
-	
 }

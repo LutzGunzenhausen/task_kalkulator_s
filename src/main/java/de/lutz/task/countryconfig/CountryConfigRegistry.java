@@ -1,9 +1,13 @@
 package de.lutz.task.countryconfig;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.ThreadSafe;
 
 /**
  * Registry to collect all the {@link CountryConfiguration}s and give central
@@ -12,6 +16,8 @@ import java.util.Map;
  * @author Christian-PC
  * 2018
  */
+@Immutable
+@ThreadSafe
 public class CountryConfigRegistry {
 	
 	private Map<String, CountryConfiguration> configurations;
@@ -28,6 +34,6 @@ public class CountryConfigRegistry {
 	}
 	
 	public Collection<String> getCountryCodeCollection() {
-		return configurations.keySet();
+		return Collections.unmodifiableCollection(configurations.keySet());
 	}
 }

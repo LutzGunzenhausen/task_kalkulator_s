@@ -19,11 +19,11 @@ import de.lutz.task.money.Money;
 
 public class XmlParserTest {
 	
-	private static XmlParser parser;
+	private static CountryConfigXmlParser parser;
 	
 	@BeforeClass
 	public static void initialize() {
-		parser = new XmlParser();
+		parser = new CountryConfigXmlParser();
 	}
 	
 	@Test
