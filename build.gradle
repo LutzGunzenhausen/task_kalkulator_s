@@ -63,9 +63,6 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework/spring-test
 	testCompile group: 'org.springframework', name: 'spring-test', version: '5.0.2.RELEASE'
 
-	
-	
-    
     def tomcatVersion = '8.5.24'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:8.5.2"

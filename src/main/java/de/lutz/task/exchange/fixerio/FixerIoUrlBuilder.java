@@ -50,7 +50,7 @@ class FixerIoUrlBuilder {
 		return this;
 	}
 	
-	public synchronized URL build() {
+	public URL build() {
 		this.parametersAdded = false;
 		StringBuilder builder = new StringBuilder(BASE_URL);
 		appendDate(builder);
